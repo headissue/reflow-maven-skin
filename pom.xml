@@ -8,9 +8,9 @@
     <version>7</version>
   </parent>
 
-  <groupId>lt.velykis.maven.skins</groupId>
+  <groupId>com.headissue.maven</groupId>
   <artifactId>reflow-parent</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.0.1</version>
   <packaging>pom</packaging>
 
   <name>Reflow Maven Skin Parent</name>
@@ -148,6 +148,15 @@
         </plugin>
       </plugins>
     </pluginManagement>
+
+    <extensions>
+      <!-- Needed for scpexe h7e.deploy -->
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh-external</artifactId>
+      </extension>
+    </extensions>
+
   </build>
 
   <reporting>
@@ -229,6 +238,23 @@
       </build>
 
     </profile>
+
+    <profile>
+      <id>h7e.deploy</id>
+      <distributionManagement>
+        <repository>
+          <id>headissue.public</id>
+          <name>headissue public repository</name>
+          <url>${h7e.public.deploy.url}</url>
+        </repository>
+        <snapshotRepository>
+          <id>headissue.snapshot</id>
+          <name>Internal Snapshot Repository</name>
+          <url>${h7e.snapshot.deploy.url}</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+
   </profiles>
 
 </project>
